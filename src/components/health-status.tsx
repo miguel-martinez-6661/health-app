@@ -2,21 +2,19 @@ import React from 'react';
 import {Text, View} from 'react-native';
 
 interface WithChildren {
-  children: string;
+  children: React.ReactNode;
   description?: string;
 }
 
-const HealthAttributeName = ({children}: WithChildren) => {
+const HealthItemName = ({children}: WithChildren) => {
   return <Text className="text-lg font-bold text-white">{children}</Text>;
 };
 
-const HealthAttributeValue = ({children, description}: WithChildren) => {
+const HealthItemValue = ({children, description}: WithChildren) => {
   return (
-    <View className="flex-col justify-center items-center">
-      <Text className="text-4xl text-white font-thin p-3">
-        {children}
-        <Text className="text-lg">{description}</Text>
-      </Text>
+    <View className="flex-row items-end gap-2">
+      <Text className="text-5xl text-white font-thin">{children}</Text>
+      <Text className="text-lg text-white pb-1 font-thin">{description}</Text>
     </View>
   );
 };
@@ -25,12 +23,12 @@ export const HealthStatus = ({children}: WithChildren) => {
   return (
     <View className="m-2">
       <Text className="my-2 text-lg">Your Information</Text>
-      <View className="p-2 flex-row justify-between rounded-lg bg-red-500 h-28">
+      <View className="p-2 flex-row justify-between rounded-lg bg-red-500 h-28 ">
         {children}
       </View>
     </View>
   );
 };
 
-HealthStatus.Title = HealthAttributeName;
-HealthStatus.Value = HealthAttributeValue;
+HealthStatus.Title = HealthItemName;
+HealthStatus.Value = HealthItemValue;

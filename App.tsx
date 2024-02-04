@@ -1,19 +1,23 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {SafeAreaView, ScrollView} from 'react-native';
+import {Linking, SafeAreaView, ScrollView} from 'react-native';
 import {HealthStatus} from './src/components/health-status';
 import {HealthState} from './src/interface/health.interface';
 import {RequestPermission} from './src/components/request-permission';
-import {initHealth} from './src/utils/health-utils';
 import {Header} from './src/components/header';
+// @ts-ignore
+import {initHealth, getHealthSteps} from './src/utils/health-utils';
 
 const App = () => {
   const [state, setState] = useState<HealthState>();
 
+  const checkAppPermissions = useCallback(async () => {
+    Linking.openSettings();
+  }, []);
+
   const getHealthStatus = useCallback(async () => {
-    const status = await initHealth();
-    if (!status.isError) {
-      setState(status);
-    }
+    await initHealth();
+    const result = await getHealthSteps();
+    setState(result);
   }, []);
 
   useEffect(() => {
@@ -32,7 +36,7 @@ const App = () => {
             </HealthStatus.Value>
           </HealthStatus>
         ) : (
-          <RequestPermission />
+          <RequestPermission onPress={checkAppPermissions} />
         )}
       </ScrollView>
     </SafeAreaView>

@@ -17,30 +17,32 @@ export const initHealth = () =>
   new Promise((resolve, reject) => {
     GoogleFit.authorize(options)
       .then(authResult => {
-        if (authResult.success) {
-          GoogleFit.getDailySteps(new Date())
-            .then((result: StepsResponse[]) => {
-              const stepCount = getStepsFromAllDevices(result);
-              resolve({
-                ...initialState,
-                permissionGranted: true,
-                stepCount,
-              });
-            })
-            .catch(err => {
-              reject(err);
-            });
-        } else {
+        resolve(authResult.success);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+
+export const getHealthSteps = () =>
+  new Promise(resolve => {
+    if (GoogleFit.isAuthorized) {
+      GoogleFit.getDailySteps()
+        .then(result => {
+          const steps = getStepsFromAllDevices(result);
           resolve({
             ...initialState,
-            permissionGranted: false,
+            permissionGranted: true,
+            stepCount: steps,
           });
-        }
-      })
-      .catch(() => {
-        resolve({
-          ...initialState,
-          isError: true,
+        })
+        .catch(err => {
+          resolve(err);
         });
+    } else {
+      resolve({
+        ...initialState,
+        permissionGranted: false,
       });
+    }
   });

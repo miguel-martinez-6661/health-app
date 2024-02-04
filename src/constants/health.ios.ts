@@ -8,7 +8,7 @@ export const options = {
 /* Permission options */
 export const permissions = {
   permissions: {
-    read: [AppleHealthKit.Constants.Permissions.HeartRate],
-    write: [AppleHealthKit.Constants.Permissions.Steps],
+    read: [AppleHealthKit.Constants.Permissions.Steps],
+    write: [],
   },
 } as HealthKitPermissions;
