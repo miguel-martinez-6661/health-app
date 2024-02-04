@@ -1,8 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
 import {HealthStatus} from './src/components/health-status';
-import {HealthState, initHealth} from './src/utils/health-utils.ios';
+import {HealthState} from './src/interface/health.interface';
 import {RequestPermission} from './src/components/request-permission';
+import {initHealth} from './src/utils/health-utils';
 import {Header} from './src/components/header';
 
 const App = () => {
@@ -23,13 +24,16 @@ const App = () => {
     <SafeAreaView className="bg-white h-full">
       <Header />
       <ScrollView>
-        <HealthStatus>
-          <HealthStatus.Title>Steps</HealthStatus.Title>
-          <HealthStatus.Value description="steps">
-            {state?.stepCount || 0}
-          </HealthStatus.Value>
-        </HealthStatus>
-        <RequestPermission />
+        {state?.permissionGranted ? (
+          <HealthStatus>
+            <HealthStatus.Title>Steps</HealthStatus.Title>
+            <HealthStatus.Value description="steps">
+              {state?.stepCount || 0}
+            </HealthStatus.Value>
+          </HealthStatus>
+        ) : (
+          <RequestPermission />
+        )}
       </ScrollView>
     </SafeAreaView>
   );

@@ -12,18 +12,20 @@ const HealthAttributeName = ({children}: WithChildren) => {
 
 const HealthAttributeValue = ({children, description}: WithChildren) => {
   return (
-    <Text className="text-4xl text-white font-thin">
-      {children}
-      <Text className="text-lg">{description}</Text>
-    </Text>
+    <View className="flex-col justify-center items-center">
+      <Text className="text-4xl text-white font-thin p-3">
+        {children}
+        <Text className="text-lg">{description}</Text>
+      </Text>
+    </View>
   );
 };
 
 export const HealthStatus = ({children}: WithChildren) => {
   return (
     <View className="m-2">
-      <Text className="my-2 text-lg">Your Apple Health Information</Text>
-      <View className="p-2 flex-row justify-between rounded-lg bg-red-500 h-20">
+      <Text className="my-2 text-lg">Your Information</Text>
+      <View className="p-2 flex-row justify-between rounded-lg bg-red-500 h-28">
         {children}
       </View>
     </View>

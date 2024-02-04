@@ -32,7 +32,6 @@ export const initHealth = (): Promise<HealthState> =>
               ...initialState,
               isError: true,
             });
-            console.log('[ERROR] Cannot get step count!');
             return;
           }
           resolve({
