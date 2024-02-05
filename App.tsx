@@ -1,13 +1,14 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Linking, SafeAreaView, ScrollView} from 'react-native';
+import {Linking, RefreshControl, SafeAreaView, ScrollView} from 'react-native';
 import {HealthState} from './src/interface/health.interface';
 import {RequestPermission} from './src/components/request-permission';
 import {Header} from './src/components/header';
+import {HealthStepStatus} from './src/components/health-status';
 // @ts-ignore
 import {initHealth, getHealthSteps} from './src/utils/health-utils';
-import {HealthStepStatus} from './src/components/health-status';
 
 const App = () => {
+  const [refreshing, setRefreshing] = useState<boolean>(false);
   const [state, setState] = useState<HealthState>();
 
   const checkAppPermissions = useCallback(async () => {
@@ -15,10 +16,16 @@ const App = () => {
   }, []);
 
   const getHealthStatus = useCallback(async () => {
+    setRefreshing(true);
     await initHealth();
     const result = await getHealthSteps();
     setState(result);
+    setRefreshing(false);
   }, []);
+
+  const onRefresh = useCallback(() => {
+    getHealthStatus();
+  }, [getHealthStatus]);
 
   useEffect(() => {
     getHealthStatus();
@@ -27,7 +34,10 @@ const App = () => {
   return (
     <SafeAreaView className="bg-white h-full">
       <Header />
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         {state?.permissionGranted ? (
           <HealthStepStatus>
             <HealthStepStatus.Title>Steps</HealthStepStatus.Title>

@@ -31,7 +31,6 @@ export const isAuthorized = () => {
         return;
       }
       const [hasPermission] = result.permissions.read;
-      console.log(result);
       resolve(!!hasPermission);
     });
   });
