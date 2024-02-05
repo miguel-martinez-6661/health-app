@@ -35,6 +35,11 @@ yarn android
 ### For iOS
 
 ```bash
+# first run
+npx pod-install
+
+#then
+
 # using npm
 npm run ios
 
@@ -46,6 +51,16 @@ If everything is set up _correctly_, you should see your new app running in your
 
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
+### iOS assets
+<img width="400" alt="image" src="https://github.com/miguel-martinez-6661/health-app/assets/79332087/d212eaa2-b2d7-4e23-a241-035f4cd1d64e">
+<img width="400" alt="image" src="https://github.com/miguel-martinez-6661/health-app/assets/79332087/1d9c7843-f7f2-49ed-9994-e2adf1db2e9a">
+
+
+### Android assets
+<img width="400" alt="image" src="https://github.com/miguel-martinez-6661/health-app/assets/79332087/df6cd287-3664-4d36-9209-1da54b604577">
+<img width="400" alt="image" src="https://github.com/miguel-martinez-6661/health-app/assets/79332087/0990bc49-5536-450b-913d-06ef21b06b94">
+
+
 ## Step 3: Testing your App
 
 ```bash
@@ -55,3 +70,6 @@ npm run test
 # OR using Yarn
 yarn test
 ```
+
+### Test results assets
+<img width="435" alt="image" src="https://github.com/miguel-martinez-6661/health-app/assets/79332087/5172158e-2399-43bd-b392-cfdda61b5ee9">
