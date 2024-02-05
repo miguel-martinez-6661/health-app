@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> Testing should match the Header snapshot 1`] = `
+<View
+  style={
+    [
+      {
+        "paddingBottom": 8,
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingTop": 8,
+      },
+    ]
+  }
+  testID="HEADER"
+>
+  <Text
+    style={
+      [
+        {
+          "fontSize": 18,
+          "lineHeight": 28,
+        },
+      ]
+    }
+    testID="HEADER_GREETINGS"
+  >
+    Hello, Miguel
+  </Text>
+  <Text
+    style={
+      [
+        {
+          "fontWeight": "700",
+        },
+        {
+          "fontSize": 30,
+          "lineHeight": 36,
+        },
+      ]
+    }
+    testID="HEADER_TITLE"
+  >
+    Activities
+  </Text>
+</View>
+`;

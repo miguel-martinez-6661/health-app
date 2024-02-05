@@ -1,11 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Linking, SafeAreaView, ScrollView} from 'react-native';
-import {HealthStatus} from './src/components/health-status';
 import {HealthState} from './src/interface/health.interface';
 import {RequestPermission} from './src/components/request-permission';
 import {Header} from './src/components/header';
 // @ts-ignore
 import {initHealth, getHealthSteps} from './src/utils/health-utils';
+import {HealthStepStatus} from './src/components/health-status';
 
 const App = () => {
   const [state, setState] = useState<HealthState>();
@@ -29,12 +29,12 @@ const App = () => {
       <Header />
       <ScrollView>
         {state?.permissionGranted ? (
-          <HealthStatus>
-            <HealthStatus.Title>Steps</HealthStatus.Title>
-            <HealthStatus.Value description="steps">
+          <HealthStepStatus>
+            <HealthStepStatus.Title>Steps</HealthStepStatus.Title>
+            <HealthStepStatus.Value description="steps">
               {state?.stepCount || 0}
-            </HealthStatus.Value>
-          </HealthStatus>
+            </HealthStepStatus.Value>
+          </HealthStepStatus>
         ) : (
           <RequestPermission onPress={checkAppPermissions} />
         )}
